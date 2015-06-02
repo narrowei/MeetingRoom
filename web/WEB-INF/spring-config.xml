@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:aop="http://www.springframework.org/schema/aop"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/meetingroom"/>
+        <property name="user" value="root"/>
+        <property name="maxPoolSize" value="40"/>
+        <property name="minPoolSize" value="3"/>
+        <property name="initialPoolSize" value="3"/>
+        <property name="maxIdleTime" value="20"/>
+        <property name="acquireIncrement" value="3"/>
+    </bean>
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mappingResources">
+            <list>
+                <value>com/chinasoft/meetingroom/model/EmployeeEntity.hbm.xml</value>
+                <value>com/chinasoft/meetingroom/model/DepartmentEntity.hbm.xml</value>
+                <value>com/chinasoft/meetingroom/model/RoleEntity.hbm.xml</value>
+
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="myPointcut" expression="execution(* com.chinasoft.meetingroom.service.*.*(..))"/>
+        <!--<aop:pointcut id="myPointcut" expression="bean(testStruts)"/>-->
+        <aop:advisor advice-ref="txAdvice"
+                     pointcut-ref="myPointcut"/>
+    </aop:config>
+
+
+    <!--<bean id="SaySTH" class="com.chinasoft.meetingroom.test.saySTH"></bean>-->
+    <!--<bean id="testStruts" class="com.chinasoft.meetingroom.test.TestStruts" scope="prototype">-->
+        <!--<property name="sth" ref="SaySTH"/>-->
+        <!--&lt;!&ndash;<property name="sessionFactory" ref="sessionFactory"/>&ndash;&gt;-->
+    <!--</bean>-->
+    <bean id="EmployeeDao" class="com.chinasoft.meetingroom.dao.EmployeeDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="EmployeeService" class="com.chinasoft.meetingroom.service.EmployeeService">
+        <property name="employeeDao" ref="EmployeeDao"/>
+    </bean>
+    <bean id="EmployeeAction" class="com.chinasoft.meetingroom.Action.EmployeeAction">
+        <property name="employeeService" ref="EmployeeService"/>
+    </bean>
+
+</beans>

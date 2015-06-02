@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.chinasoft.meetingroom.model.MeetingParticipantsEntity" table="MeetingParticipants" schema=""
+           catalog="meetingroom">
+        <id name="mpId">
+            <column name="mpId" sql-type="int" not-null="true"/>
+            <generator class="native"/>
+        </id>
+        <property name="meetingId">
+            <column name="MeetingId" sql-type="int" not-null="true"/>
+        </property>
+        <property name="participantId">
+            <column name="ParticipantId" sql-type="int" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

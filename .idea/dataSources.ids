@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - meetingroom@localhost" uuid="97ba28a5-c81e-404b-a6b5-8cca137a6b6f">
+    <database-info product="MySQL" version="5.6.23" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <schema name="" catalog="meetingroom"/>
+    <table name="Department" schema="" catalog="meetingroom" type="TABLE">
+      <column name="DepartmentId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="DepartmentName" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Remark" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="DepartmentId"/>
+      <exported-key name="employee_ibfk_1" table="Employee" schema="" catalog="meetingroom" columns="DepartmentId"/>
+    </table>
+    <table name="Employee" schema="" catalog="meetingroom" type="TABLE">
+      <column name="EmployeeId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="EmployeeName" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="UserName" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="UserPwd" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Phone" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Email" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DepartmentId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Roleid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="EmployeeStatus" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="Remark" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="EmployeeId"/>
+      <foreign-key name="employee_ibfk_1" columns="DepartmentId" ref-table="Department" ref-schema="" ref-catalog="meetingroom" ref-columns="DepartmentId" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="employee_ibfk_2" columns="Roleid" ref-table="Role" ref-schema="" ref-catalog="meetingroom" ref-columns="RoleId" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="Meeting" schema="" catalog="meetingroom" type="TABLE">
+      <column name="MeetingId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="MeetingName" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="RoomId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ReservationistId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="NumOfParticipants" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="BeginTime" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="EndTime" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="ReservationTime" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="CanceledTime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="MeetingStatus" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Description" sqlType="VARCHAR" precision="500" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="MeetingId"/>
+    </table>
+    <table name="MeetingParticipants" schema="" catalog="meetingroom" type="TABLE">
+      <column name="mpId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="MeetingId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ParticipantId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="mpId"/>
+    </table>
+    <table name="MeetingRoom" schema="" catalog="meetingroom" type="TABLE">
+      <column name="RoomId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="RoomCode" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="RoomName" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="RoomCapacity" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="RoomStatus" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Description" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="RoomId"/>
+    </table>
+    <table name="Role" schema="" catalog="meetingroom" type="TABLE">
+      <column name="RoleId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="RoleName" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Remark" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="RoleId"/>
+      <exported-key name="employee_ibfk_2" table="Employee" schema="" catalog="meetingroom" columns="Roleid"/>
+    </table>
+    <table name="counter" schema="" catalog="meetingroom" type="TABLE">
+      <column name="visitcount" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+    </table>
+  </data-source>
+</component>

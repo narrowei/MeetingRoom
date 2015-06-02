@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.chinasoft.meetingroom.model.EmployeeEntity" table="Employee"  catalog="meetingroom">
+        <id name="employeeId">
+
+            <column name="EmployeeId" sql-type="int" not-null="true"/>
+            <generator class="native"/>
+        </id>
+        <property name="employeeName">
+            <column name="EmployeeName" sql-type="varchar" length="20" not-null="true"/>
+        </property>
+        <property name="userName">
+            <column name="UserName" sql-type="varchar" length="50" not-null="true"/>
+        </property>
+        <property name="userPwd">
+            <column name="UserPwd" sql-type="varchar" length="50" not-null="true"/>
+        </property>
+        <property name="phone">
+            <column name="Phone" sql-type="varchar" length="20"/>
+        </property>
+        <property name="email">
+            <column name="Email" sql-type="varchar" length="20"/>
+        </property>
+        <property name="departmentId">
+            <column name="DepartmentId" sql-type="int" not-null="true"/>
+        </property>
+        <property name="roleid">
+            <column name="Roleid" sql-type="int" not-null="true"/>
+        </property>
+        <property name="employeeStatus">
+            <column name="EmployeeStatus" sql-type="int" not-null="true"/>
+        </property>
+        <property name="remark">
+            <column name="Remark" sql-type="varchar" length="200"/>
+        </property>
+        <many-to-one name="departmentByDepartmentId" class="com.chinasoft.meetingroom.model.DepartmentEntity">
+            <column name="DId" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="roleByRoleid" class="com.chinasoft.meetingroom.model.RoleEntity">
+            <column name="Rid" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

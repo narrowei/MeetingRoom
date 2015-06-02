@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.chinasoft.meetingroom.model.DepartmentEntity" table="Department" schema="" catalog="meetingroom">
+        <id name="departmentId">
+            <column name="DepartmentId" sql-type="int" not-null="true"/>
+            <generator class="native"/>
+        </id>
+        <property name="departmentName">
+            <column name="DepartmentName" sql-type="varchar" length="20" not-null="true"/>
+        </property>
+        <property name="remark">
+            <column name="Remark" sql-type="varchar" length="200"/>
+        </property>
+        <set name="employeesByDepartmentId" inverse="true">
+            <key>
+                <column name="DepartmentId" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.chinasoft.meetingroom.model.EmployeeEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.chinasoft.meetingroom.model.MeetingRoomEntity" table="MeetingRoom" schema=""
+           catalog="meetingroom">
+        <id name="roomId">
+            <column name="RoomId" sql-type="int" not-null="true"/>
+            <generator class="native"/>
+        </id>
+        <property name="roomCode">
+            <column name="RoomCode" sql-type="varchar" length="10" not-null="true"/>
+        </property>
+        <property name="roomName">
+            <column name="RoomName" sql-type="varchar" length="20" not-null="true"/>
+        </property>
+        <property name="roomCapacity">
+            <column name="RoomCapacity" sql-type="int" not-null="true"/>
+        </property>
+        <property name="roomStatus">
+            <column name="RoomStatus" sql-type="int" not-null="true"/>
+        </property>
+        <property name="description">
+            <column name="Description" sql-type="varchar" length="200"/>
+        </property>
+    </class>
+</hibernate-mapping>
