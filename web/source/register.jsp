@@ -54,49 +54,61 @@
                 <div class="content-nav">
                     人员管理 > 员工注册
                 </div>
-                <form>
+                <form action="register.action" method="post">
                     <fieldset>
                         <legend>员工信息</legend>
                         <table class="formtable" style="width:50%">
                             <tr>
                                 <td>姓名：</td>
                                 <td>
-                                    <input type="text" id="employeename" maxlength="20"/>
+                                    <input type="text" name="realname" maxlength="20"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>账户名：</td>
                                 <td>
-                                    <input type="text" id="accountname" maxlength="20"/>
+                                    <input type="text" name="username" maxlength="20"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>密码：</td>
                                 <td>
-                                    <input type="password" id="password" maxlength="20" placeholder="请输入6位以上的密码"/>
+                                    <input type="password" name="password" maxlength="20" placeholder="请输入6位以上的密码"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>确认密码：</td>
                                 <td>
-                                    <input type="password" id="confirm" maxlength="20"/>
+                                    <input type="password" name="repwd" maxlength="20"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>联系电话：</td>
                                 <td>
-                                    <input type="text" id="phone" maxlength="20"/>
+                                    <input type="text" name="telnumber" maxlength="20"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>电子邮件：</td>
                                 <td>
-                                    <input type="text" id="email" maxlength="20"/>
+                                    <input type="text" name="email" maxlength="20"/>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="6" class="command">
-                                    <input type="button" class="clickbutton" value="注册"/>
+                                <td>所属部门</td>
+                                <td>
+                                    <select name="departmentId">
+                                        <option value="1">实训部</option>
+                                        <option value="2">市场部</option>
+                                        <option value="3">办公室</option>
+                                        <option value="4">人力资源部</option>
+                                        <option value="5">督导部</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="7" class="command">
+                                    <input type="submit"  value="注册"/>
                                     <input type="reset" class="clickbutton" value="重置"/>
                                 </td>
                             </tr>

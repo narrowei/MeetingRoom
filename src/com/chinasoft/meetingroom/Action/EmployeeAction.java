@@ -1,6 +1,8 @@
 package com.chinasoft.meetingroom.Action;
 
+import com.chinasoft.meetingroom.model.DepartmentEntity;
 import com.chinasoft.meetingroom.model.EmployeeEntity;
+import com.chinasoft.meetingroom.service.DepartmentService;
 import com.chinasoft.meetingroom.service.EmployeeService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -16,9 +18,40 @@ public class EmployeeAction extends ActionSupport{
     private String pwd;
     private EmployeeEntity employeeEntity;
     private String realname;
+    private String username;
+    private String password;
     private String repwd;
-    private int telnumber;
+    private String telnumber;
     private String email;
+    private String departmentId;
+    private DepartmentService departmentService;
+    public void setDepartmentService(DepartmentService departmentService) {
+        this.departmentService = departmentService;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
+    }
 
     public String getEmail() {
         return email;
@@ -44,11 +77,11 @@ public class EmployeeAction extends ActionSupport{
         this.repwd = repwd;
     }
 
-    public int getTelnumber() {
+    public String getTelnumber() {
         return telnumber;
     }
 
-    public void setTelnumber(int telnumber) {
+    public void setTelnumber(String telnumber) {
         this.telnumber = telnumber;
     }
 
@@ -87,20 +120,26 @@ public class EmployeeAction extends ActionSupport{
     }
 
     public String employeeLogin(){
-        if(employeeService.verifyUser(name,pwd)){
-            employeeEntity=employeeService.getEmployee(name);
-            ActionContext actionContext=ActionContext.getContext();
-            actionContext.put("level",employeeEntity.getRoleid());
-            pwd=null;
+        if(employeeService.verifyUser(name,pwd)) {
+            employeeEntity = employeeService.getEmployeebyName(name);
+            ActionContext actionContext = ActionContext.getContext();
+            actionContext.getSession().put("level", employeeEntity.getRoleByRoleid().getRoleName());
+            pwd = null;
             return SUCCESS;
         }else {
             return ERROR;
         }
     }
-    public String saveEmployee(){
-
-
-        return ERROR;
+    public String saveEmployee() {
+        System.out.println(realname+username);
+        DepartmentEntity departmentEntity = departmentService.getDepartmentByID(DepartmentEntity.class, Integer.valueOf(departmentId));
+        if(password.equals(repwd)) {
+            EmployeeEntity employee = new EmployeeEntity(realname, username, password, telnumber, email, departmentEntity);
+            employeeService.saveEmployee(employee);
+            return SUCCESS;
+        } else
+            return ERROR;
     }
+
 
 }

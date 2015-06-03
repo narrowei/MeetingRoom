@@ -6,7 +6,7 @@
 
     <class name="com.chinasoft.meetingroom.model.CounterEntity" table="counter" schema="" catalog="meetingroom">
         <id name="visitcount">
-            <column name="visitcount" sql-type="int"/>
+            <column name="visitcount" sql-type="int" not-null="true"/>
             <generator class="native"/>
         </id>
     </class>

@@ -12,7 +12,7 @@
        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/meetingroom"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/meetingroom?useUnicode=true&amp;characterEncoding=utf-8"/>
         <property name="user" value="root"/>
         <property name="maxPoolSize" value="40"/>
         <property name="minPoolSize" value="3"/>
@@ -70,6 +70,13 @@
     </bean>
     <bean id="EmployeeAction" class="com.chinasoft.meetingroom.Action.EmployeeAction">
         <property name="employeeService" ref="EmployeeService"/>
+        <property name="departmentService" ref="departmentService"/>
+    </bean>
+    <bean class="com.chinasoft.meetingroom.dao.DepartmentDao" id="departmentDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.chinasoft.meetingroom.service.DepartmentService" id="departmentService">
+        <property name="departmentDao" ref="departmentDao"/>
     </bean>
 
 </beans>

@@ -3,7 +3,7 @@ package com.chinasoft.meetingroom.model;
 import java.util.Collection;
 
 /**
- * Created by wei on 15/5/29.
+ * Created by wei on 15/6/2.
  */
 public class DepartmentEntity {
     private Integer departmentId;

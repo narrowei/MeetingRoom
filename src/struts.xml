@@ -25,5 +25,13 @@
                    /source/login.jsp
                </result>
            </action>
+           <action name="register" class="EmployeeAction" method="saveEmployee">
+               <result>
+                   /source/notifications.jsp
+               </result>
+               <result name="error" type="redirect">
+                   /source/register.jsp
+               </result>
+           </action>
        </package>
 </struts>

@@ -3,7 +3,7 @@ package com.chinasoft.meetingroom.model;
 import java.sql.Timestamp;
 
 /**
- * Created by wei on 15/5/29.
+ * Created by wei on 15/6/2.
  */
 public class MeetingEntity {
     private Integer meetingId;

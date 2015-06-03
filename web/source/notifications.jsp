@@ -16,6 +16,7 @@
             </div>
             <div class="header-quicklink">
                 欢迎您，<strong>${employeeEntity.userName}</strong>
+                您的权限是:<strong>${level}</strong>
                 <a href="changepassword.jsp">[修改密码]</a>
             </div>
         </div>

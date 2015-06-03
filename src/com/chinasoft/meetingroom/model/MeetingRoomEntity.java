@@ -1,7 +1,7 @@
 package com.chinasoft.meetingroom.model;
 
 /**
- * Created by wei on 15/5/29.
+ * Created by wei on 15/6/2.
  */
 public class MeetingRoomEntity {
     private Integer roomId;

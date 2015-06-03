@@ -44,8 +44,8 @@ public class EmployeeService {
     public EmployeeEntity getEmployee(Serializable Id){
         return employeeDao.get(EmployeeEntity.class,Id);
     }
-    public EmployeeEntity saveEmployee(String name){return employeeDao.getEmployeeEntityByName(name);}
-    public void addEmployee(EmployeeEntity employeeEntity){
+    public EmployeeEntity getEmployeebyName(String name){return employeeDao.getEmployeeEntityByName(name);}
+    public void saveEmployee(EmployeeEntity employeeEntity){
         employeeDao.save(employeeEntity);
     }
 }

@@ -4,8 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.chinasoft.meetingroom.model.MeetingParticipantsEntity" table="MeetingParticipants" schema=""
-           catalog="meetingroom">
+    <class name="com.chinasoft.meetingroom.model.MeetingParticipantsEntity" table="MeetingParticipants" schema="" catalog="meetingroom">
         <id name="mpId">
             <column name="mpId" sql-type="int" not-null="true"/>
             <generator class="native"/>
