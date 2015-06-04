@@ -1,5 +1,9 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="s" uri="/struts-tags" %><html>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java"  %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+
+
+<html>
+
     <head>
 <meta http-equiv="content-type" content="text/html";charset="gb2312">
         <title>CoolMeeting会议管理系统</title>
@@ -63,66 +67,24 @@
                         <th>电子邮件</th>
                         <th>操作</th>
                     </tr>
+                    <s:iterator value="employees">
                     <tr>
-                        <td>周海</td>
-                        <td>Jerry</td>
-                        <td>13800138000</td>
-                        <td>jerry@chinasofti.com</td>
+                        <td><s:property value="employeeName"/> </td>
+                        <td><s:property value="userName"/> </td>
+                        <td><s:property value="phone"/> </td>
+                        <td><s:property value="email"/> </td>
                         <td>
-                            <input type="button" class="clickbutton" value="通过"/>
-                            <input type="button" class="clickbutton" value="删除"/>
+                            <a class="clickbutton" href="deleteEmployee.action?id=<s:property value='employeeId'/>">删除</a>
+                            <a class="clickbutton" href="checkEmployee.action?id=<s:property value='employeeId'/>">通过</a>
+
+                            <%--<s:submit action="checkEmployee?id=<s:property value='employeeId'/>" value="通过" />--%>
+                            <%--<s:submit action="deleteEmployee?id=<s:property value='employeeId'/>" value="删除" />--%>
+                            <%--<s:submit action="deleteEmployee?id=${employeeId}" value="删除" />--%>
+                            <%--<input type="button" class="clickbutton" value="通过"/>--%>
+                            <%--<input type="button" class="clickbutton" value="删除"/>--%>
                         </td>
                     </tr>
-                    <tr>
-                        <td>周海</td>
-                        <td>Jerry</td>
-                        <td>13800138000</td>
-                        <td>jerry@chinasofti.com</td>
-                        <td>
-                            <input type="button" class="clickbutton" value="通过"/>
-                            <input type="button" class="clickbutton" value="删除"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>周海</td>
-                        <td>Jerry</td>
-                        <td>13800138000</td>
-                        <td>jerry@chinasofti.com</td>
-                        <td>
-                            <input type="button" class="clickbutton" value="通过"/>
-                            <input type="button" class="clickbutton" value="删除"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>周海</td>
-                        <td>Jerry</td>
-                        <td>13800138000</td>
-                        <td>jerry@chinasofti.com</td>
-                        <td>
-                            <input type="button" class="clickbutton" value="通过"/>
-                            <input type="button" class="clickbutton" value="删除"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>周海</td>
-                        <td>Jerry</td>
-                        <td>13800138000</td>
-                        <td>jerry@chinasofti.com</td>
-                        <td>
-                            <a class="clickbutton" href="#">通过</a>
-                            <a class="clickbutton" href="#">删除</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>周海</td>
-                        <td>Jerry</td>
-                        <td>13800138000</td>
-                        <td>jerry@chinasofti.com</td>
-                        <td>
-                            <a class="clickbutton" href="#">通过</a>
-                            <a class="clickbutton" href="#">删除</a>
-                        </td>
-                    </tr>
+                    </s:iterator>
                 </table>
             </div>
         </div>

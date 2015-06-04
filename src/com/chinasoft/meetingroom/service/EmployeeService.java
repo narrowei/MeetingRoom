@@ -1,6 +1,7 @@
 package com.chinasoft.meetingroom.service;
 
 import com.chinasoft.meetingroom.dao.EmployeeDao;
+import com.chinasoft.meetingroom.model.DepartmentEntity;
 import com.chinasoft.meetingroom.model.EmployeeEntity;
 
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.util.List;
 public class EmployeeService {
     public EmployeeDao employeeDao;
     public EmployeeEntity employeeEntity;
+    private EmployeeEntity employee;
 
 
 
@@ -47,5 +49,36 @@ public class EmployeeService {
     public EmployeeEntity getEmployeebyName(String name){return employeeDao.getEmployeeEntityByName(name);}
     public void saveEmployee(EmployeeEntity employeeEntity){
         employeeDao.save(employeeEntity);
+    }
+
+    public boolean changePassword(String oldPwd, String newPwd ,Serializable id) {
+         employee = employeeDao.get(EmployeeEntity.class, id);
+        if (oldPwd.equals(employee.getUserPwd())) {
+            employee.setUserPwd(newPwd);
+            employeeDao.update(employee);
+            return  true;
+        }else
+            return  false;
+
+    }
+
+    public List<EmployeeEntity> showUncheckedEmployee(){
+        Integer states=0;
+        return employeeDao.findByEmployeeStates(states);
+    }
+
+    public void deleteEmployee(EmployeeEntity employeeEntity) {
+        employeeDao.delete(employeeEntity);
+    }
+
+    public void updateEmployee(EmployeeEntity employee) {
+        employeeDao.update(employee);
+    }
+
+    public List<EmployeeEntity> getAllEmployee(int offset, int length) {
+        return employeeDao.getAllEmployee(offset, length);
+    }
+    public long getListSize() {
+        return employeeDao.getListSize();
     }
 }

@@ -1,7 +1,12 @@
 package com.chinasoft.meetingroom.dao;
 
 import com.chinasoft.meetingroom.model.DepartmentEntity;
+import com.chinasoft.meetingroom.model.EmployeeEntity;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import java.io.Serializable;
@@ -13,6 +18,7 @@ import java.util.List;
 public class DepartmentDao implements BaseDao<DepartmentEntity> {
     private SessionFactory sessionFactory;
     private HibernateTemplate hibernateTemplate;
+
     public HibernateTemplate getHibernateTemplate() {
         if (hibernateTemplate == null) {
             hibernateTemplate = new HibernateTemplate(sessionFactory);
@@ -47,10 +53,19 @@ public class DepartmentDao implements BaseDao<DepartmentEntity> {
 
     @Override
     public List<DepartmentEntity> findall(Class<DepartmentEntity> entityClazz) {
-        return (List<DepartmentEntity>)getHibernateTemplate().find("from DepartmentEntity");
+        return (List<DepartmentEntity>) getHibernateTemplate().find("from DepartmentEntity");
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-}
+
+
+
+
+
+    }
+
+
+
+

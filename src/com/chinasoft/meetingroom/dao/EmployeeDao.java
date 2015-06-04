@@ -1,7 +1,11 @@
 package com.chinasoft.meetingroom.dao;
 
 import com.chinasoft.meetingroom.model.EmployeeEntity;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import java.io.Serializable;
@@ -48,7 +52,7 @@ public class EmployeeDao implements BaseDao<EmployeeEntity> {
 
     @Override
     public void delete(Class<EmployeeEntity> entityClazz, Serializable Id) {
-        getHibernateTemplate().delete(String.valueOf((Integer)Id),entityClazz);
+        getHibernateTemplate().delete(entityClazz);
 
     }
 
@@ -70,9 +74,44 @@ public class EmployeeDao implements BaseDao<EmployeeEntity> {
         return ((List<EmployeeEntity>) getHibernateTemplate().find("from EmployeeEntity where employeeStatus=?", States));
 
     }
+
     //通过username取到employee类
     public EmployeeEntity getEmployeeEntityByName(String name){
         List<EmployeeEntity> employeeEntities=(ArrayList<EmployeeEntity>)findByAccountName(name);
         return employeeEntities.get(0);
     }
+
+    public List<EmployeeEntity> getListForPage(final String hql, final int offset, final int length) {
+        List<EmployeeEntity> list = getHibernateTemplate().execute(new HibernateCallback<List>() {
+            @Override
+            public List doInHibernate(Session session) throws HibernateException {
+                Query query = session.createQuery(hql);
+                query.setFirstResult(offset);
+                query.setMaxResults(length);
+                List list = query.list();
+                return list;
+            }
+        });
+        return list;
+    }
+
+
+    public List<EmployeeEntity> getAllEmployee(int offset, int length) {
+        String hql = "from EmployeeEntity";
+        return getListForPage(hql, offset, length);
+
+    }
+
+    public long getListSize(){
+        final long count= getHibernateTemplate().execute(new HibernateCallback<Long>() {
+            @Override
+            public Long doInHibernate(Session session) throws HibernateException {
+                Query query=session.createQuery("select count(*) from EmployeeEntity");
+                List list=query.list();
+                return (Long)list.get(0);
+            }
+        });
+        return count;
+    }
+
 }

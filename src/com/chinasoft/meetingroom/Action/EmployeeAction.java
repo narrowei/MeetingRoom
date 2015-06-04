@@ -8,25 +8,90 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sun.applet2.preloader.event.ErrorEvent;
 
+import java.util.List;
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**
  * Created by wei on 15/6/1.
  */
 public class EmployeeAction extends ActionSupport{
+    private long count;
+    private int currentPage;
+    private int page;
     private String name;
     private String pwd;
+    private int offset;
     private EmployeeEntity employeeEntity;
     private String realname;
     private String username;
     private String password;
     private String repwd;
+    private String newpwd;
     private String telnumber;
     private String email;
     private String departmentId;
     private DepartmentService departmentService;
+    private List<EmployeeEntity> employees;
+    private int id;
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public long getCount() {
+        return count;
+    }
+
+    public void setCount(long count) {
+        this.count = count;
+    }
+
+    public int getOffset() {
+        return offset;
+    }
+
+    public void setOffset(int offset) {
+        this.offset = offset;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<EmployeeEntity> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<EmployeeEntity> employees) {
+        this.employees = employees;
+    }
+
     public void setDepartmentService(DepartmentService departmentService) {
         this.departmentService = departmentService;
+    }
+
+    public String getNewpwd() {
+        return newpwd;
+    }
+
+    public void setNewpwd(String newpwd) {
+        this.newpwd = newpwd;
     }
 
     public String getUsername() {
@@ -120,16 +185,18 @@ public class EmployeeAction extends ActionSupport{
     }
 
     public String employeeLogin(){
-        if(employeeService.verifyUser(name,pwd)) {
+        if(employeeService.verifyUser(name, pwd)) {
             employeeEntity = employeeService.getEmployeebyName(name);
             ActionContext actionContext = ActionContext.getContext();
             actionContext.getSession().put("level", employeeEntity.getRoleByRoleid().getRoleName());
+            actionContext.getSession().put("id", employeeEntity.getEmployeeId());
             pwd = null;
             return SUCCESS;
         }else {
             return ERROR;
         }
     }
+
     public String saveEmployee() {
         System.out.println(realname+username);
         DepartmentEntity departmentEntity = departmentService.getDepartmentByID(DepartmentEntity.class, Integer.valueOf(departmentId));
@@ -140,6 +207,52 @@ public class EmployeeAction extends ActionSupport{
         } else
             return ERROR;
     }
+
+    public String changePassword() {
+        if(repwd.equals(newpwd)) {
+            ActionContext actionContext = ActionContext.getContext();
+            Integer id = (Integer) actionContext.getSession().get("id");
+            if (employeeService.changePassword(password, newpwd, id)) {
+                return SUCCESS;
+            } else {
+            }
+                return ERROR;
+        }else
+            return ERROR;
+    }
+
+    public String showUncheckedEmployee() {
+        employees=employeeService.showUncheckedEmployee();
+        return SUCCESS;
+    }
+
+    public String deleteEmployee() {
+        System.out.println(id);
+        EmployeeEntity emplyee=employeeService.getEmployee(id);
+        employeeService.deleteEmployee(emplyee);
+        return SUCCESS;
+    }
+
+    public String checkEmployee(){
+        System.out.println(id);
+        EmployeeEntity emplyee=employeeService.getEmployee(id);
+        emplyee.setEmployeeStatus(1);
+        employeeService.updateEmployee(emplyee);
+        System.out.println(emplyee.getEmployeeName() + emplyee.getEmployeeStatus());
+        return SUCCESS;
+    }
+
+    public String getAllEmployee() {
+        count = employeeService.getListSize();
+        page = (int)Math.ceil(count / 5);
+        currentPage=(int)(offset/5+1);
+        employees = employeeService.getAllEmployee(offset, 5);
+        return SUCCESS;
+    }
+
+
+
+
 
 
 }

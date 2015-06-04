@@ -33,5 +33,33 @@
                    /source/register.jsp
                </result>
            </action>
+           <action name="changePassword" class="EmployeeAction" method="changePassword">
+               <result>
+                   /source/notifications.jsp
+               </result>
+               <result name="error" type="redirect">
+                   /source/changepassword.jsp
+               </result>
+           </action>
+           <action name="showUncheckedEmployee" class="EmployeeAction" method="showUncheckedEmployee">
+               <result>
+                   /source/approveaccount.jsp
+               </result>
+           </action>
+           <action name="deleteEmployee" class="EmployeeAction" method="deleteEmployee">
+               <result >
+                   /source/notifications.jsp
+               </result>
+           </action>
+           <action name="checkEmployee" class="EmployeeAction" method="checkEmployee">
+               <result >
+                   /source/notifications.jsp
+               </result>
+           </action>
+           <action name="getAllEmployee" class="EmployeeAction" method="getAllEmployee">
+               <result>
+                   /source/searchemployees.jsp
+               </result>
+           </action>
        </package>
 </struts>

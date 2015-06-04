@@ -9,6 +9,7 @@
         </style>
     </head>
     <body>
+    <s:debug></s:debug>
         <div class="page-header">
             <div class="header-banner">
                 <img src="images/header.png" alt="CoolMeeting"/>
@@ -87,11 +88,15 @@
                     <h3 style="text-align:center;color:black">查询结果</h3>
                     <div class="pager-header">
                         <div class="header-info">
-                            共<span class="info-number">54</span>条结果，
-                            分成<span class="info-number">6</span>页显示，
-                            当前第<span class="info-number">1</span>页
+                            共<span class="info-number">${count}</span>条结果，
+                            分成<span class="info-number">${page}</span>页显示，
+                            当前第<span class="info-number">${currentPage}</span>页
                         </div>
                         <div class="header-nav">
+                            <a href="getAllEmployee.action?offset=1" class="clickbutton">首页</a>
+                            <a href="getAllEmployee.action?offset=${offset-5}" class="clickbutton">上页</a>
+                            <a href="getAllEmployee.action?offset=${offset+5}" class="clickbutton">下页</a>
+                            <a href="getAllEmployee.action?offset=${page}" class="clickbutton">末页</a>
                             <input type="button" class="clickbutton" value="首页"/>
                             <input type="button" class="clickbutton" value="上页"/>
                             <input type="button" class="clickbutton" value="下页"/>
@@ -109,96 +114,17 @@
                         <th>电子邮件</th>
                         <th>操作</th>
                     </tr>
+                    <s:iterator value="employees">
                     <tr>
-                        <td>周海</td>
-                        <td>Jerry</td>
-                        <td>13800138000</td>
-                        <td>jerry@chinasofti.com</td>
+                        <<td><s:property value="employeeName"/> </td>
+                        <td><s:property value="userName"/> </td>
+                        <td><s:property value="phone"/> </td>
+                        <td><s:property value="email"/> </td>
                         <td>
                             <a class="clickbutton" href="#">关闭账号</a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>周海</td>
-                        <td>Jerry</td>
-                        <td>13800138000</td>
-                        <td>jerry@chinasofti.com</td>
-                        <td>
-                            <a class="clickbutton" href="#">关闭账号</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>周海</td>
-                        <td>Jerry</td>
-                        <td>13800138000</td>
-                        <td>jerry@chinasofti.com</td>
-                        <td>
-                            <a class="clickbutton" href="#">关闭账号</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>周海</td>
-                        <td>Jerry</td>
-                        <td>13800138000</td>
-                        <td>jerry@chinasofti.com</td>
-                        <td>
-                            <a class="clickbutton" href="#">关闭账号</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>周海</td>
-                        <td>Jerry</td>
-                        <td>13800138000</td>
-                        <td>jerry@chinasofti.com</td>
-                        <td>
-                            <a class="clickbutton" href="#">关闭账号</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>周海</td>
-                        <td>Jerry</td>
-                        <td>13800138000</td>
-                        <td>jerry@chinasofti.com</td>
-                        <td>
-                            <a class="clickbutton" href="#">关闭账号</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>周海</td>
-                        <td>Jerry</td>
-                        <td>13800138000</td>
-                        <td>jerry@chinasofti.com</td>
-                        <td>
-                            <a class="clickbutton" href="#">关闭账号</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>周海</td>
-                        <td>Jerry</td>
-                        <td>13800138000</td>
-                        <td>jerry@chinasofti.com</td>
-                        <td>
-                            <a class="clickbutton" href="#">关闭账号</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>周海</td>
-                        <td>Jerry</td>
-                        <td>13800138000</td>
-                        <td>jerry@chinasofti.com</td>
-                        <td>
-                            <a class="clickbutton" href="#">关闭账号</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>周海</td>
-                        <td>Jerry</td>
-                        <td>13800138000</td>
-                        <td>jerry@chinasofti.com</td>
-                        <td>
-                            <a class="clickbutton" href="#">关闭账号</a>
-                        </td>
-                    </tr>
+                    </s:iterator>
                 </table>
             </div>
         </div>

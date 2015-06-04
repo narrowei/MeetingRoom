@@ -51,26 +51,26 @@
                 <div class="content-nav">
                     修改密码
                 </div>
-                <form>
+                <form action="changePassword.action">
                     <fieldset>
                         <legend>修改密码信息</legend>
                         <table class="formtable" style="width:50%">
                             <tr>
                                 <td>原密码:</td>
                                 <td>
-                                    <input id="origin" type="password" />
+                                    <input name="password" type="password" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>新密码:</td>
                                 <td>
-                                    <input id="new" type="password" />
+                                    <input name="newpwd" type="password" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>确认新密码：</td>
                                 <td>
-                                    <input id="confirm" type="password"/>
+                                    <input name="repwd" type="password"/>
                                 </td>
                             </tr>
                             <tr>
