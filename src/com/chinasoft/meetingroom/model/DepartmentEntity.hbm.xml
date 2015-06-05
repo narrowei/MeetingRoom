@@ -15,11 +15,11 @@
         <property name="remark">
             <column name="Remark" sql-type="varchar" length="200"/>
         </property>
-        <set name="employeesByDepartmentId" inverse="true">
-            <key>
-                <column name="DepartmentId" not-null="true"/>
-            </key>
-            <one-to-many not-found="ignore" class="com.chinasoft.meetingroom.model.EmployeeEntity"/>
-        </set>
+        <!--<set name="employeesByDepartmentId" inverse="true">-->
+            <!--<key>-->
+                <!--<column name="DepartmentId" not-null="false"/>-->
+            <!--</key>-->
+            <!--<one-to-many not-found="ignore" class="com.chinasoft.meetingroom.model.EmployeeEntity"/>-->
+        <!--</set>-->
     </class>
 </hibernate-mapping>

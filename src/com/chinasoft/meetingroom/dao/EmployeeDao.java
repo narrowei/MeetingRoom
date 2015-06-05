@@ -75,6 +75,23 @@ public class EmployeeDao implements BaseDao<EmployeeEntity> {
 
     }
 
+    public List<EmployeeEntity> findByEmployeeByRealnameOrAccountNameOrEmployeeStates(final int offset, final int length,
+                                                                                      final String Realname, final String Username) {
+        List<EmployeeEntity> employeeEntities=getHibernateTemplate().execute(new HibernateCallback<List<EmployeeEntity>>() {
+            @Override
+            public List<EmployeeEntity> doInHibernate(Session session) throws HibernateException {
+                Query query=session.createQuery("from EmployeeEntity e where e.employeeName like ? or e.userName like ?");
+                query.setString(0, Realname);
+                query.setString(1, Username);
+                query.setFirstResult(offset);
+                query.setMaxResults(length);
+                List<EmployeeEntity> list = query.list();
+                return list;
+            }
+        });
+        return employeeEntities;
+    }
+
     //通过username取到employee类
     public EmployeeEntity getEmployeeEntityByName(String name){
         List<EmployeeEntity> employeeEntities=(ArrayList<EmployeeEntity>)findByAccountName(name);
@@ -102,16 +119,20 @@ public class EmployeeDao implements BaseDao<EmployeeEntity> {
 
     }
 
-    public long getListSize(){
-        final long count= getHibernateTemplate().execute(new HibernateCallback<Long>() {
+    public long getListSize(final String Realname, final String Username) {
+        final long count = getHibernateTemplate().execute(new HibernateCallback<Long>() {
             @Override
             public Long doInHibernate(Session session) throws HibernateException {
-                Query query=session.createQuery("select count(*) from EmployeeEntity");
-                List list=query.list();
-                return (Long)list.get(0);
+                Query query = session.createQuery("select  count (*) from EmployeeEntity e where e.employeeName like ? or e.userName like ?");
+                query.setString(0, Realname);
+                query.setString(1, Username);
+                List list = query.list();
+                return (Long) list.get(0);
             }
         });
         return count;
     }
+
+
 
 }

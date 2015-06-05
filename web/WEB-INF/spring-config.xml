@@ -35,7 +35,6 @@
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <prop key="show_sql">true</prop>
-                <prop key="hibernate.format_sql">true</prop>
             </props>
         </property>
     </bean>
@@ -77,6 +76,9 @@
     </bean>
     <bean class="com.chinasoft.meetingroom.service.DepartmentService" id="departmentService">
         <property name="departmentDao" ref="departmentDao"/>
+    </bean>
+    <bean class="com.chinasoft.meetingroom.Action.DepartmentAction" id="departmentAction">
+        <property name="departmentService" ref="departmentService"/>
     </bean>
 
 </beans>

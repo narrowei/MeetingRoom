@@ -55,30 +55,28 @@
                 <div class="content-nav">
                     会议预定 > 搜索员工
                 </div>
-                <form>
+                <form action="findByEmployeeByRealnameOrAccountNameOrEmployeeStates.action">
                     <fieldset>
                         <legend>搜索会议</legend>
                         <table class="formtable">
                             <tr>
                                 <td>姓名：</td>
                                 <td>
-                                    <input type="text" id="employeename" maxlength="20"/>
+                                    <input type="text" name="realname" maxlength="20"/>
                                 </td>
                                 <td>账号名：</td>
                                 <td>
-                                    <input type="text" id="accountname" maxlength="20"/>
+                                    <input type="text" name="username" maxlength="20"/>
                                 </td>
-                                <td>状态：</td>
                                 <td>
-                                    <input type="radio" id="status" name="status" value="1" checked="checked"/><label>已批准</label>
-                                    <input type="radio" id="status" name="status" value="0"/><label>待审批</label>
-                                    <input type="radio" id="status" name="status" value="-1"/><label>已关闭</label>
+                                    <input type="text" name="offset" value="0" hidden="hidden">
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="6" class="command">
-                                    <input type="button" class="clickbutton" value="查询"/>
+                                    <input type="submit" class="clickbutton" value="查询"/>
                                     <input type="reset" class="clickbutton" value="重置"/>
+                                    <%--<a class="clickbutton" href="findByEmployeeByRealnameOrAccountNameOrEmployeeStates.action?realname=&username=&offset=0">查询所有</a>--%>
                                 </td>
                             </tr>
                         </table>
@@ -93,16 +91,15 @@
                             当前第<span class="info-number">${currentPage}</span>页
                         </div>
                         <div class="header-nav">
-                            <a href="getAllEmployee.action?offset=1" class="clickbutton">首页</a>
-                            <a href="getAllEmployee.action?offset=${offset-5}" class="clickbutton">上页</a>
-                            <a href="getAllEmployee.action?offset=${offset+5}" class="clickbutton">下页</a>
-                            <a href="getAllEmployee.action?offset=${page}" class="clickbutton">末页</a>
-                            <input type="button" class="clickbutton" value="首页"/>
-                            <input type="button" class="clickbutton" value="上页"/>
-                            <input type="button" class="clickbutton" value="下页"/>
-                            <input type="button" class="clickbutton" value="末页"/>
-                            跳到第<input type="text" id="pagenum" class="nav-number"/>页
-                            <input type="button" class="clickbutton" value="跳转"/>
+                            <a href="findByEmployeeByRealnameOrAccountNameOrEmployeeStates.action?realname=${realname}&username=${username}&offset=0" class="clickbutton">首页</a>
+                            <a href="findByEmployeeByRealnameOrAccountNameOrEmployeeStates.action?realname=${realname}&username=${username}&offset=${offset-5}" class="clickbutton">上页</a>
+                            <a href="findByEmployeeByRealnameOrAccountNameOrEmployeeStates.action?realname=${realname}&username=${username}&offset=${offset+5}" class="clickbutton">下页</a>
+                            <a href="findByEmployeeByRealnameOrAccountNameOrEmployeeStates.action?realname=${realname}&username=${username}&offset=${page*5-4}" class="clickbutton">末页</a>
+                            <form >
+                            跳到第<input type="text" name="pagenum" class="nav-number"/>页
+                            <input type="submit" class="clickbutton" value="跳转"/>
+                            </form>
+                            <%--<href="getAllEmployee.action?pagenum=${pagenum}" class="clickbutton">跳转</a>--%>
                         </div>
                     </div>
                 </div>
@@ -121,7 +118,7 @@
                         <td><s:property value="phone"/> </td>
                         <td><s:property value="email"/> </td>
                         <td>
-                            <a class="clickbutton" href="#">关闭账号</a>
+                            <a class="clickbutton" href="deleteEmployee.action?id=${employeeId}">删除</a>
                         </td>
                     </tr>
                     </s:iterator>

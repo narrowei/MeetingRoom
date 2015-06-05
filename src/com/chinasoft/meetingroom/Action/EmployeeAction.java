@@ -15,12 +15,14 @@ import java.util.concurrent.PriorityBlockingQueue;
  * Created by wei on 15/6/1.
  */
 public class EmployeeAction extends ActionSupport{
+    private int pagenum;
     private long count;
     private int currentPage;
     private int page;
     private String name;
     private String pwd;
     private int offset;
+    private int employeeStates;
     private EmployeeEntity employeeEntity;
     private String realname;
     private String username;
@@ -33,6 +35,22 @@ public class EmployeeAction extends ActionSupport{
     private DepartmentService departmentService;
     private List<EmployeeEntity> employees;
     private int id;
+
+    public int getEmployeeStates() {
+        return employeeStates;
+    }
+
+    public void setEmployeeStates(int employeeStates) {
+        this.employeeStates = employeeStates;
+    }
+
+    public int getPagenum() {
+        return pagenum;
+    }
+
+    public void setPagenum(int pagenum) {
+        this.pagenum = pagenum;
+    }
 
     public int getCurrentPage() {
         return currentPage;
@@ -241,15 +259,44 @@ public class EmployeeAction extends ActionSupport{
         System.out.println(emplyee.getEmployeeName() + emplyee.getEmployeeStatus());
         return SUCCESS;
     }
+//
+//    public String getAllEmployee() {
+//        if(pagenum!=0) {
+//            offset = (int) (pagenum * 5 - 4);
+//            employees = employeeService.getAllEmployee(offset, 6);
+//            pagenum = 0;
+//            return SUCCESS;
+//        }else {
+//        count = employeeService.getListSize();
+//        page = (int)Math.ceil(count / 5);
+//        currentPage=(int)(offset/5+1);
+//        employees = employeeService.getAllEmployee(offset, 6);
+//        return SUCCESS;
+//        }
+//
+//    }
 
-    public String getAllEmployee() {
-        count = employeeService.getListSize();
-        page = (int)Math.ceil(count / 5);
-        currentPage=(int)(offset/5+1);
-        employees = employeeService.getAllEmployee(offset, 5);
-        return SUCCESS;
+    public String findByEmployeeByRealnameOrAccountNameOrEmployeeStates() {
+        if(pagenum!=0){
+            offset = (int) (pagenum * 5 - 4);
+            employees = employeeService.findByEmployeeByRealnameOrAccountNameOrEmployeeStates(offset, 5, realname, username);
+            pagenum = 0;
+            return SUCCESS;
+
+        }else {
+            count = employeeService.getListSize(realname,username);
+            if(count<=5) {
+                page = 1;
+            }else {
+            page = (int) Math.ceil(count / 5.0);
+            }
+            currentPage = (int) (offset / 5 + 1);
+            System.out.println(realname + username);
+            employees = employeeService.findByEmployeeByRealnameOrAccountNameOrEmployeeStates(offset, 5, realname, username);
+            System.out.println(count);
+            return SUCCESS;
+        }
     }
-
 
 
 

@@ -56,10 +56,16 @@
                    /source/notifications.jsp
                </result>
            </action>
-           <action name="getAllEmployee" class="EmployeeAction" method="getAllEmployee">
+           <!--<action name="getAllEmployee" class="EmployeeAction" method="getAllEmployee">-->
+               <!--<result>-->
+                   <!--/source/searchemployees.jsp-->
+               <!--</result>-->
+           <!--</action>-->
+           <action name="findByEmployeeByRealnameOrAccountNameOrEmployeeStates" class="EmployeeAction" method="findByEmployeeByRealnameOrAccountNameOrEmployeeStates">
                <result>
                    /source/searchemployees.jsp
                </result>
            </action>
        </package>
+       <include file="department.xml"/>
 </struts>

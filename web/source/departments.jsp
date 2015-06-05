@@ -1,6 +1,13 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %><html>
     <head>
+        <%
+            String path = request.getRequestURI();
+            String basePath = request.getScheme() + "://"
+                    + request.getServerName() + ":" + request.getServerPort()
+                    + path;
+        %>
+        <base href="<%=basePath%>">
       <meta http-equiv="content-type" content="text/html";charset="gb2312">
         <title>CoolMeeting会议管理系统</title>
         <link rel="stylesheet" href="styles/common.css"/>
@@ -51,11 +58,11 @@
                 <div class="content-nav">
                     人员管理 > 部门管理
                 </div>
-                <form>
+                <form action="saveDepartment.action">
                     <fieldset>
                         <legend>添加部门</legend>
                         部门名称:
-                        <input type="text" id="departmentname" maxlength="20"/>
+                        <input type="text"   name="name" maxlength="20"/>
                         <input type="submit" class="clickbutton" value="添加"/>
                     </fieldset>
                 </form>
@@ -66,41 +73,15 @@
                         <th>部门名称</th>
                         <th>操作</th>
                     </tr>
+                    <s:iterator value="departmentEntityList">
                     <tr>
-                        <td>1</td>
-                        <td>技术部</td>
+                        <td><s:property value="departmentId"/></td>
+                        <td><s:property value="departmentName"/></td>
                         <td>
-                            <a class="clickbutton" href="#">编辑</a>
-                            <a class="clickbutton" href="#">删除</a>
+                            <a class="clickbutton" href="deleteDepartment.action?id=<s:property value='departmentId'/>">删除</a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>
-                            <input type="text" value="销售部"/>
-                        </td>
-                        <td>
-                            <a class="clickbutton" href="#">编辑</a>
-                            <a class="clickbutton" href="#">取消</a>
-                            <a class="clickbutton" href="#">删除</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>市场部</td>
-                        <td>
-                            <a class="clickbutton" href="#">编辑</a>
-                            <a class="clickbutton" href="#">删除</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>行政部</td>
-                        <td>
-                            <a class="clickbutton" href="#">编辑</a>
-                            <a class="clickbutton" href="#">删除</a>
-                        </td>
-                    </tr>
+                    </s:iterator>
                 </table>
             </div>
         </div>

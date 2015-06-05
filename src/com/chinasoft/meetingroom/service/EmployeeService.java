@@ -4,6 +4,7 @@ import com.chinasoft.meetingroom.dao.EmployeeDao;
 import com.chinasoft.meetingroom.model.DepartmentEntity;
 import com.chinasoft.meetingroom.model.EmployeeEntity;
 
+import javax.jws.soap.SOAPBinding;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,35 @@ public class EmployeeService {
     public List<EmployeeEntity> getAllEmployee(int offset, int length) {
         return employeeDao.getAllEmployee(offset, length);
     }
-    public long getListSize() {
-        return employeeDao.getListSize();
+    public long getListSize(String realname,String username) {
+        if(realname.equals("")&&username.equals("")) {
+            realname = "%%";
+            username = "%%";
+        }
+        if(!realname.equals("")) {
+            realname = "%" + realname + "%";
+        }
+        if(!username.equals("")) {
+            username = "%" + username + "%";
+        }
+        return employeeDao.getListSize(realname, username);
     }
+    public List<EmployeeEntity> findByEmployeeByRealnameOrAccountNameOrEmployeeStates( int offset,  int length,
+                                                                                       String Realname,  String Username) {
+        if(Realname.equals("")&&Username.equals("")) {
+            Realname = "%%";
+            Username = "%%";
+        }
+        if(!Realname.equals("")) {
+            Realname = "%" + Realname + "%";
+        }
+        if(!Username.equals("")) {
+            Username = "%" + Username + "%";
+        }
+        System.out.println(Username);
+        return employeeDao.findByEmployeeByRealnameOrAccountNameOrEmployeeStates(offset, length, Realname, Username);
+    }
+
+
+
 }
