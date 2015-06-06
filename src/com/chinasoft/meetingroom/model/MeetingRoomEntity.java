@@ -11,6 +11,16 @@ public class MeetingRoomEntity {
     private Integer roomStatus;
     private String description;
 
+    public MeetingRoomEntity() {}
+
+    public MeetingRoomEntity(String roomCode, String roomName, Integer roomCapacity, Integer roomStatus, String description) {
+        this.roomCode = roomCode;
+        this.roomName = roomName;
+        this.roomCapacity = roomCapacity;
+        this.roomStatus = roomStatus;
+        this.description = description;
+    }
+
     public Integer getRoomId() {
         return roomId;
     }

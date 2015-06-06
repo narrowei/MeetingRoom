@@ -68,4 +68,5 @@
            </action>
        </package>
        <include file="department.xml"/>
+       <include file="meetingRoom.xml"/>
 </struts>

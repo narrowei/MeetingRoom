@@ -80,5 +80,14 @@
     <bean class="com.chinasoft.meetingroom.Action.DepartmentAction" id="departmentAction">
         <property name="departmentService" ref="departmentService"/>
     </bean>
+    <bean class="com.chinasoft.meetingroom.dao.MeetingRoomDao" id="meetingRoomDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.chinasoft.meetingroom.service.MeetingRoomService" id="meetingRoomService">
+        <property name="meetingRoomDao" ref="meetingRoomDao"/>
+    </bean>
+    <bean class="com.chinasoft.meetingroom.Action.MeetingRoomAction" id="meetingRoomAction">
+        <property name="meetingRoomService" ref="meetingRoomService"/>
+    </bean>
 
 </beans>
