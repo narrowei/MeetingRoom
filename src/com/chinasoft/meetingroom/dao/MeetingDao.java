@@ -60,6 +60,7 @@ getHibernateTemplate().delete(entity);
     }
 
 
+    //查询7天内的会议
     public List<Object[]> find7DayMeetings() {
         Date d = new Date();
         final Date before = new Date(d.getTime());
@@ -67,7 +68,8 @@ getHibernateTemplate().delete(entity);
         List<Object[]> list =getHibernateTemplate().execute(new HibernateCallback<List<Object[]>>() {
             @Override
             public List<Object[]> doInHibernate(Session session) throws HibernateException {
-                Query query = session.createQuery("select m.meetingName,r.roomName,m.beginTime,m.endTime from MeetingEntity m ,MeetingRoomEntity r,EmployeeEntity e " +
+                Query query = session.createQuery("select m.meetingName,r.roomName,m.beginTime,m.endTime " +
+                        "from MeetingEntity m ,MeetingRoomEntity r,EmployeeEntity e ,m.id " +
                         "where m.roomId=r.roomId and m.reservationistId=e.id and m.beginTime between ? and ?");
                 query.setDate(0, before);
                 query.setDate(1, after);
@@ -78,14 +80,13 @@ getHibernateTemplate().delete(entity);
         return list;
     }
 
+    //查询取消的会议
     public List<Object[]> findCanceledMeetings() {
-        Date d = new Date();
-        final Date before = new Date(d.getTime());
-        final Date after = new Date(d.getTime() + 7 * 24 * 60 * 60 * 1000);
         List<Object[]> list =getHibernateTemplate().execute(new HibernateCallback<List<Object[]>>() {
             @Override
             public List<Object[]> doInHibernate(Session session) throws HibernateException {
-                Query query = session.createQuery("select m.meetingName,r.roomName,m.beginTime,m.endTime from MeetingEntity m ,MeetingRoomEntity r,EmployeeEntity e " +
+                Query query = session.createQuery("select m.meetingName,r.roomName,m.beginTime,m.endTime " +
+                        "from MeetingEntity m ,MeetingRoomEntity r,EmployeeEntity e ,m.id " +
                         "where m.roomId=r.roomId and m.reservationistId=e.id and m.meetingStatus=2");
                 List<Object[]> l = (List<Object[]>)query.list();
                 return l;
@@ -94,15 +95,14 @@ getHibernateTemplate().delete(entity);
         return list;
     }
 
+
+    //通过会议的预订者的id来得到会议
     public List<Object[]> findMeetingsById(final int id) {
-        Date d = new Date();
-        final Date before = new Date(d.getTime());
-        final Date after = new Date(d.getTime() + 7 * 24 * 60 * 60 * 1000);
         List<Object[]> list =getHibernateTemplate().execute(new HibernateCallback<List<Object[]>>() {
             @Override
             public List<Object[]> doInHibernate(Session session) throws HibernateException {
                 Query query = session.createQuery("select m.meetingName,r.roomName,m.beginTime," +
-                        "m.endTime,m.reservationTime from MeetingEntity m ,MeetingRoomEntity r,EmployeeEntity e " +
+                        "m.endTime,m.reservationTime ,m.id from MeetingEntity m ,MeetingRoomEntity r,EmployeeEntity e " +
                         "where m.roomId=r.roomId and m.reservationistId=e.id and m.reservationistId=?");
                 query.setInteger(0, id);
                 List<Object[]> l = (List<Object[]>)query.list();
@@ -112,17 +112,34 @@ getHibernateTemplate().delete(entity);
         return list;
     }
 
+    //寻找用户所被邀请的会议
     public List<Object[]> findAttendMeeting(final int id) {
-        Date d = new Date();
-        final Date before = new Date(d.getTime());
-        final Date after = new Date(d.getTime() + 7 * 24 * 60 * 60 * 1000);
+
         List<Object[]> list =getHibernateTemplate().execute(new HibernateCallback<List<Object[]>>() {
             @Override
             public List<Object[]> doInHibernate(Session session) throws HibernateException {
                 Query query = session.createQuery("select m.meetingName,r.roomName,m.beginTime,m.endTime," +
-                        "m.reservationTime,e.employeeName from MeetingEntity m ,MeetingRoomEntity r,EmployeeEntity e ," +
+                        "m.reservationTime,e.employeeName,m.id from MeetingEntity m ,MeetingRoomEntity r,EmployeeEntity e ," +
                         "MeetingParticipantsEntity mpe where m.roomId=r.roomId and m.reservationistId=e.id " +
                         "and mpe.meetingId=m.id and mpe.participantId=?");
+                query.setInteger(0, id);
+                List<Object[]> l = (List<Object[]>)query.list();
+                return l;
+            }
+        });
+        return list;
+    }
+
+
+    //通过会议的id来寻找会议
+    public List<Object[]> findByMeetingId(final int id){
+        List<Object[]> list =getHibernateTemplate().execute(new HibernateCallback<List<Object[]>>() {
+            @Override
+            public List<Object[]> doInHibernate(Session session) throws HibernateException {
+                Query query = session.createQuery("select m.meetingName,m.numOfParticipants," +
+                        "m.beginTime,m.endTime,m.description,m.id from MeetingEntity m ,MeetingRoomEntity r," +
+                        "EmployeeEntity e " +
+                        "where m.roomId=r.roomId and m.reservationistId=e.id and m.id=?");
                 query.setInteger(0, id);
                 List<Object[]> l = (List<Object[]>)query.list();
                 return l;

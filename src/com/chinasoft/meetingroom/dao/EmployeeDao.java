@@ -98,6 +98,7 @@ public class EmployeeDao implements BaseDao<EmployeeEntity> {
         return employeeEntities.get(0);
     }
 
+    //查询Employee的所有实例并且有分页操作
     public List<EmployeeEntity> getListForPage(final String hql, final int offset, final int length) {
         List<EmployeeEntity> list = getHibernateTemplate().execute(new HibernateCallback<List>() {
             @Override
@@ -119,6 +120,7 @@ public class EmployeeDao implements BaseDao<EmployeeEntity> {
 
     }
 
+    //读取用户所搜索的所有用户个数
     public long getListSize(final String Realname, final String Username) {
         final long count = getHibernateTemplate().execute(new HibernateCallback<Long>() {
             @Override
@@ -133,6 +135,7 @@ public class EmployeeDao implements BaseDao<EmployeeEntity> {
         return count;
     }
 
+    //通过department的id来取得employee
     public List<EmployeeEntity> getEmployeeNameByDepartment(final int D_id) {
         final List<EmployeeEntity> nameList = getHibernateTemplate().execute(new HibernateCallback<List<EmployeeEntity>>() {
             @Override

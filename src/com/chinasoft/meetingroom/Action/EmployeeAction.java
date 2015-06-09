@@ -202,6 +202,7 @@ public class EmployeeAction extends ActionSupport{
         this.pwd = pwd;
     }
 
+    //登录
     public String employeeLogin(){
         if(employeeService.verifyUser(name, pwd)) {
             employeeEntity = employeeService.getEmployeebyName(name);
@@ -215,6 +216,7 @@ public class EmployeeAction extends ActionSupport{
         }
     }
 
+    //保存用户
     public String saveEmployee() {
         System.out.println(realname+username);
         DepartmentEntity departmentEntity = departmentService.getDepartmentByID(DepartmentEntity.class, Integer.valueOf(departmentId));
@@ -226,6 +228,9 @@ public class EmployeeAction extends ActionSupport{
             return ERROR;
     }
 
+
+
+    //更改密码
     public String changePassword() {
         if(repwd.equals(newpwd)) {
             ActionContext actionContext = ActionContext.getContext();
@@ -239,11 +244,13 @@ public class EmployeeAction extends ActionSupport{
             return ERROR;
     }
 
+    //显示所有待验证的用户
     public String showUncheckedEmployee() {
         employees=employeeService.showUncheckedEmployee();
         return SUCCESS;
     }
 
+    //删除用户
     public String deleteEmployee() {
         System.out.println(id);
         EmployeeEntity emplyee=employeeService.getEmployee(id);
@@ -251,6 +258,7 @@ public class EmployeeAction extends ActionSupport{
         return SUCCESS;
     }
 
+    //验证用户
     public String checkEmployee(){
         System.out.println(id);
         EmployeeEntity emplyee=employeeService.getEmployee(id);
@@ -276,6 +284,7 @@ public class EmployeeAction extends ActionSupport{
 //
 //    }
 
+    //通过姓名或用户名来寻找employee
     public String findByEmployeeByRealnameOrAccountNameOrEmployeeStates() {
         if(pagenum!=0){
             offset = (int) (pagenum * 5 - 4);

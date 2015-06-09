@@ -218,17 +218,20 @@ public class MeetingRoomAction extends ActionSupport {
         this.meetingRoomService = meetingRoomService;
     }
 
+    //显示所有会议室
     public String showAllMeetingRoom() {
         meetingRooms = meetingRoomService.findAllMeetingRoom();
         return SUCCESS;
     }
 
+    //保存会议室
     public String SaveMeetingRoom() {
         MeetingRoomEntity meetingRoomEntity = new MeetingRoomEntity(roomnumber, capacity, roomcapacity, status, description);
         meetingRoomService.saveMeetingRoom(meetingRoomEntity);
         return SUCCESS;
     }
 
+    //更新会议室
     public String updateMeetingRoom() {
         MeetingRoomEntity meetingRoomEntity = meetingRoomService.findMeetingRoom(id);
         meetingRoomEntity.setDescription(description);
@@ -240,11 +243,14 @@ public class MeetingRoomAction extends ActionSupport {
         return SUCCESS;
     }
 
+    //通过会议id来读取会议室
     public String readMeetingRoom() {
         meetingRoom = meetingRoomService.findMeetingRoom(id);
         return SUCCESS;
     }
 
+
+    //通过条件查询会议室
     public String finalMeetingRoomByWord() { if(pagenum!=0){
         offset = (int) (pagenum * 5 - 4);
         o = meetingRoomService.findMeetingRoomByWord(offset, 6, meetingName, roomName,

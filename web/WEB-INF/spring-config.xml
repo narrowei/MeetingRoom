@@ -100,5 +100,11 @@
     <bean class="com.chinasoft.meetingroom.Action.MeetingAction" id="meetingAction">
         <property name="meetingService" ref="meetingService"/>
     </bean>
+    <bean class="com.chinasoft.meetingroom.dao.MeetingParticipantsDao" id="meetingParticipantsDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.chinasoft.meetingroom.service.meetingparticipantsService" id="meetingparticipantsService">
+        <property name="meetingParticipantsDao" ref="meetingParticipantsDao"/>
+    </bean>
 
 </beans>

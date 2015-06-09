@@ -27,6 +27,7 @@ public class EmployeeService {
     public void setEmployeeDao(EmployeeDao employeeDao) {
         this.employeeDao = employeeDao;
     }
+    //验证用户
     public boolean verifyUser(String name,String pwd)
     {
         List<EmployeeEntity> employees=(ArrayList<EmployeeEntity>)employeeDao.findByAccountName(name);

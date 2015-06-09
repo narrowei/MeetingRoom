@@ -30,4 +30,8 @@ public class MeetingService {
         return meetingDao.findAttendMeeting(id);
     }
 
+    public  List<Object[]> findByMeetingId(int id) {
+        return meetingDao.findByMeetingId(id);
+    }
+
 }

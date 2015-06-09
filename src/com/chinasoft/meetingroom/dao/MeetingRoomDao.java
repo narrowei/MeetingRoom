@@ -63,6 +63,7 @@ public class MeetingRoomDao implements BaseDao<MeetingRoomEntity> {
         this.sessionFactory = sessionFactory;
     }
 
+    //通过会议室的名字、会议室的会议名、会议室的预定，结束时间、预定者来寻找会议
     public List<Object[]> findMeetingRoomByWords(final int offset,final int length,final String meetingName,final String roomName,
     final String reservername,final String berforeReserve,final String AfterReserve,final String beforeEnd,final String afterEnd  ) {
         final List<Object[]> list = getHibernateTemplate().execute(new HibernateCallback<List<Object[]>>() {
@@ -86,6 +87,7 @@ public class MeetingRoomDao implements BaseDao<MeetingRoomEntity> {
         return list;
     }
 
+    //计算用户所查询的会议个数
     public Long getMeetingsSize(final String meetingName,final String roomName,
                                 final String reservername,final String berforeReserve,final String AfterReserve,final String beforeEnd,final String afterEnd){
         final long count=getHibernateTemplate().execute(new HibernateCallback<Long>() {
