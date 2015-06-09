@@ -17,6 +17,12 @@
             <file>jar://$MODULE_DIR$/lib/struts2-core.jar!/struts-default.xml</file>
             <file>file://$MODULE_DIR$/src/department.xml</file>
             <file>file://$MODULE_DIR$/src/meetingRoom.xml</file>
+            <file>file://$MODULE_DIR$/src/JSON.xml</file>
+            <file>file://$MODULE_DIR$/src/struts-plugin.xml</file>
+            <file>file://$MODULE_DIR$/src/Meeting.xml</file>
+          </fileset>
+          <fileset id="s2fileset2" name="My Fileset " removed="false">
+            <file>jar://$MODULE_DIR$/../development/struts-2.3.20/lib/struts2-json-plugin-2.3.20.jar!/struts-plugin.xml</file>
           </fileset>
           <propertiesKeys disabled="false" />
         </configuration>
@@ -27,7 +33,7 @@
         <datasource-map>
           <unit-entry name="a.xml" value="97ba28a5-c81e-404b-a6b5-8cca137a6b6f" />
           <unit-entry name="hibernate.cfg.xml" />
-          <unit-entry name="sessionFactory" value="97ba28a5-c81e-404b-a6b5-8cca137a6b6f" />
+          <unit-entry name="sessionFactory" value="dataSource" />
         </datasource-map>
         <naming-strategy-map>
           <unit-entry name="sessionFactory" />

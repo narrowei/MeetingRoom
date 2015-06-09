@@ -2,9 +2,15 @@ package com.chinasoft.meetingroom.Action;
 
 import com.chinasoft.meetingroom.model.DepartmentEntity;
 import com.chinasoft.meetingroom.service.DepartmentService;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import net.sf.json.JSONArray;
+import org.apache.struts2.ServletActionContext;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -15,6 +21,8 @@ public class DepartmentAction extends ActionSupport {
     private String name;
     private List<DepartmentEntity> departmentEntityList;
     private int id;
+
+
 
     public int getId() {
         return id;
@@ -62,6 +70,11 @@ public class DepartmentAction extends ActionSupport {
     public String deleteDepartment() {
         DepartmentEntity departmentEntity = departmentService.getDepartment(id);
         departmentService.delete(departmentEntity);
+        return SUCCESS;
+    }
+
+    public String getDepartmentByJson() throws IOException{
+        departmentEntityList = departmentService.getDepartments();
         return SUCCESS;
     }
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="meeting" extends="Employee">
+        <action name="find7DayMeetings" class="meetingAction" method="find7DayMeetings">
+            <result>
+                /source/notifications.jsp
+            </result>
+        </action>
+        <action name="findCanceledMeetings" class="meetingAction" method="findCanceledMeetings">
+            <result>
+                /source/notifications.jsp
+            </result>
+        </action>
+        <action name="findMeetingsById" class="meetingAction" method="findMeetingsById">
+            <result>
+                /source/mybookings.jsp
+            </result>
+        </action>
+        <action name="findAttendMeeting" class="meetingAction" method="findAttendMeeting">
+            <result>
+                /source/mymeetings.jsp
+            </result>
+        </action>
+    </package>
+</struts>

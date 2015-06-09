@@ -27,7 +27,9 @@
                 <value>com/chinasoft/meetingroom/model/EmployeeEntity.hbm.xml</value>
                 <value>com/chinasoft/meetingroom/model/DepartmentEntity.hbm.xml</value>
                 <value>com/chinasoft/meetingroom/model/RoleEntity.hbm.xml</value>
-
+                <value>com/chinasoft/meetingroom/model/MeetingRoomEntity.hbm.xml</value>
+                <value>com/chinasoft/meetingroom/model/MeetingEntity.hbm.xml</value>
+                <value>com/chinasoft/meetingroom/model/MeetingParticipantsEntity.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -88,6 +90,15 @@
     </bean>
     <bean class="com.chinasoft.meetingroom.Action.MeetingRoomAction" id="meetingRoomAction">
         <property name="meetingRoomService" ref="meetingRoomService"/>
+    </bean>
+    <bean class="com.chinasoft.meetingroom.dao.MeetingDao" id="meetingDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.chinasoft.meetingroom.service.MeetingService" id="meetingService">
+        <property name="meetingDao" ref="meetingDao"/>
+    </bean>
+    <bean class="com.chinasoft.meetingroom.Action.MeetingAction" id="meetingAction">
+        <property name="meetingService" ref="meetingService"/>
     </bean>
 
 </beans>

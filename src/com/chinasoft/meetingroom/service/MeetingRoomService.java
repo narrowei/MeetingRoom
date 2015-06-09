@@ -39,4 +39,38 @@ public class MeetingRoomService {
     public MeetingRoomEntity findMeetingRoom(Serializable Id) {
         return meetingRoomDao.get(MeetingRoomEntity.class, Id);
     }
+
+    public List<Object[]> findMeetingRoomByWord(int offset, int length, String meetingName, String roomName,
+                                                String reservername, String berforeReserve, String AfterReserve, String beforeEnd, String afterEnd) {
+
+        if(meetingName.equals("")&&roomName.equals("")&&reservername.equals("")&&berforeReserve.equals("")&&beforeEnd.equals("")&&AfterReserve.equals("")&&afterEnd.equals("")){
+            meetingName="%%";
+            roomName = "%%";
+            reservername = "%%";
+        }
+        if(!meetingName.equals(""))
+            meetingName = "%" + meetingName + "%";
+        if(!roomName.equals(""))
+            roomName = "%" + roomName + "%";
+        if(!reservername.equals(""))
+            reservername = "%" + reservername + "%";
+        return meetingRoomDao.findMeetingRoomByWords(offset, length, meetingName, roomName, reservername, berforeReserve, AfterReserve, beforeEnd, afterEnd);
+    }
+
+    public long getMeetingsSize(String meetingName, String roomName,
+                                String reservername, String berforeReserve, String AfterReserve, String beforeEnd, String afterEnd) {
+
+        if(meetingName.equals("")&&roomName.equals("")&&reservername.equals("")&&berforeReserve.equals("")&&beforeEnd.equals("")&&AfterReserve.equals("")&&afterEnd.equals("")){
+            meetingName="%%";
+            roomName = "%%";
+            reservername = "%%";
+        }
+        if(!meetingName.equals(""))
+            meetingName = "%" + meetingName + "%";
+        if(!roomName.equals(""))
+            roomName = "%" + roomName + "%";
+        if(!reservername.equals(""))
+            reservername = "%" + reservername + "%";
+        return meetingRoomDao.getMeetingsSize(meetingName, roomName, reservername, berforeReserve, AfterReserve, beforeEnd, afterEnd);
+    }
 }

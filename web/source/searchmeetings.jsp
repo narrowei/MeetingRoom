@@ -9,6 +9,7 @@
         </style>
     </head>
     <body>
+    <s:debug/>
         <div class="page-header">
             <div class="header-banner">
                 <img src="images/header.png" alt="CoolMeeting"/>
@@ -54,41 +55,41 @@
                 <div class="content-nav">
                     会议预定 > 搜索会议
                 </div>
-                <form>
+                <form action="getAllMeetingByWord.action">
                     <fieldset>
                         <legend>搜索会议</legend>
                         <table class="formtable">
                             <tr>
                                 <td>会议名称：</td>
                                 <td>
-                                    <input type="text" id="meetingname" maxlength="20"/>
+                                    <input type="text" name="meetingName" maxlength="20"/>
                                 </td>
                                 <td>会议室名称：</td>
                                 <td>
-                                    <input type="text" id="roomname" maxlength="20"/>
+                                    <input type="text" name="roomName" maxlength="20"/>
                                 </td>
                                 <td>预定者姓名：</td>
                                 <td>
-                                    <input type="text" id="reservername" maxlength="20"/>
+                                    <input type="text" name="reservername" maxlength="20"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>预定日期：</td>
                                 <td colspan="5">
-                                    从&nbsp;<input type="date" id="reservefromdate" placeholder="例如：2013-10-20"/>
-                                    到&nbsp;<input type="date" id="reservetodate" placeholder="例如：2013-10-22"/>
+                                    从&nbsp;<input type="date" name="berforeReserve" placeholder="例如：2013-10-20"/>
+                                    到&nbsp;<input type="date" name="AfterReserve" placeholder="例如：2013-10-22"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>会议日期：</td>
                                 <td colspan="5">
-                                    从&nbsp;<input type="date" id="meetingfromdate" placeholder="例如：2013-10-20"/>
-                                    到&nbsp;<input type="date" id="meetingtodate" placeholder="例如：2013-10-22"/>
+                                    从&nbsp;<input type="date" name="beforeEnd" placeholder="例如：2013-10-20"/>
+                                    到&nbsp;<input type="date" name="afterEnd" placeholder="例如：2013-10-22"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="6" class="command">
-                                    <input type="button" class="clickbutton" value="查询"/>
+                                    <input type="submit" class="clickbutton" value="查询"/>
                                     <input type="reset" class="clickbutton" value="重置"/>
                                 </td>
                             </tr>
@@ -99,15 +100,15 @@
                     <h3 style="text-align:center;color:black">查询结果</h3>
                     <div class="pager-header">
                         <div class="header-info">
-                            共<span class="info-number">54</span>条结果，
-                            分成<span class="info-number">6</span>页显示，
-                            当前第<span class="info-number">1</span>页
+                            共<span class="info-number">${count}</span>条结果，
+                            分成<span class="info-number">${page}</span>页显示，
+                            当前第<span class="info-number">${currentPage}</span>页
                         </div>
                         <div class="header-nav">
-                            <input type="button" class="clickbutton" value="首页"/>
-                            <input type="button" class="clickbutton" value="上页"/>
-                            <input type="button" class="clickbutton" value="下页"/>
-                            <input type="button" class="clickbutton" value="末页"/>
+                            <a href="getAllMeetingByWord.action?meetingName=${meetingName}&roomName=${roomName}&reservername=${reservername}&berforeReserve=${berforeReserve}&AfterReserve=${AfterReserve}&beforeEnd=${beforeEnd}&afterEnd=${afterEnd}&offset=0" class="clickbutton">首页</a>
+                            <a href="getAllMeetingByWord.action?meetingName=${meetingName}&roomName=${roomName}&reservername=${reservername}&berforeReserve=${berforeReserve}&AfterReserve=${AfterReserve}&beforeEnd=${beforeEnd}&afterEnd=${afterEnd}&offset=${offset-5}" class="clickbutton">上页</a>
+                            <a href="getAllMeetingByWord.action?meetingName=${meetingName}&roomName=${roomName}&reservername=${reservername}&berforeReserve=${berforeReserve}&AfterReserve=${AfterReserve}&beforeEnd=${beforeEnd}&afterEnd=${afterEnd}&offset=${offset+5}" class="clickbutton">下页</a>
+                            <a href="getAllMeetingByWord.action?meetingName=${meetingName}&roomName=${roomName}&reservername=${reservername}&berforeReserve=${berforeReserve}&AfterReserve=${AfterReserve}&beforeEnd=${beforeEnd}&afterEnd=${afterEnd}&offset=${page*5-4}" class="clickbutton">末页</a>
                             跳到第<input type="text" id="pagenum" class="nav-number"/>页
                             <input type="button" class="clickbutton" value="跳转"/>
                         </div>
@@ -115,125 +116,28 @@
                 </div>
                 <table class="listtable">
                     <tr class="listheader">
-                        <th>会议名称</th>
                         <th>会议室名称</th>
+                        <th>预定者</th>
+                        <th>会议名称</th>
                         <th>会议开始时间</th>
                         <th>会议结束时间</th>
                         <th>会议预定时间</th>
-                        <th>预定者</th>
                         <th>操作</th>
                     </tr>
+                    <s:iterator value="o" var="os" >
+
                     <tr>
-                        <td>业务洽谈会</td>
-                        <td>第一会议室</td>
-                        <td>2013-10-12 8:00</td>
-                        <td>2013-10-12 12:00</td>
-                        <td>2013-10-10 16:00</td>
-                        <td>Jerry</td>
+                        <td><s:property value="#os[0]"/> </td>
+                        <td><s:property value="#os[1]"/></td>
+                        <td><s:property value="#os[2]"/></td>
+                        <td><s:property value="#os[3]"/></td>
+                        <td><s:property value="#os[4]"/></td>
+                        <td><s:property value="#os[5]"/></td>
                         <td>
                             <a class="clickbutton" href="meetingdetails.jsp">查看详情</a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>业务洽谈会</td>
-                        <td>第一会议室</td>
-                        <td>2013-10-12 8:00</td>
-                        <td>2013-10-12 12:00</td>
-                        <td>2013-10-10 16:00</td>
-                        <td>Jerry</td>
-                        <td>
-                            <a class="clickbutton" href="meetingdetails.jsp">查看详情</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>业务洽谈会</td>
-                        <td>第一会议室</td>
-                        <td>2013-10-12 8:00</td>
-                        <td>2013-10-12 12:00</td>
-                        <td>2013-10-10 16:00</td>
-                        <td>Jerry</td>
-                        <td>
-                            <a class="clickbutton" href="meetingdetails.jsp">查看详情</a>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>业务洽谈会</td>
-                        <td>第一会议室</td>
-                        <td>2013-10-12 8:00</td>
-                        <td>2013-10-12 12:00</td>
-                        <td>2013-10-10 16:00</td>
-                        <td>Jerry</td>
-                        <td>
-                            <a class="clickbutton" href="meetingdetails.jsp">查看详情</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>业务洽谈会</td>
-                        <td>第一会议室</td>
-                        <td>2013-10-12 8:00</td>
-                        <td>2013-10-12 12:00</td>
-                        <td>2013-10-10 16:00</td>
-                        <td>Jerry</td>
-                        <td>
-                            <a class="clickbutton" href="meetingdetails.jsp">查看详情</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>业务洽谈会</td>
-                        <td>第一会议室</td>
-                        <td>2013-10-12 8:00</td>
-                        <td>2013-10-12 12:00</td>
-                        <td>2013-10-10 16:00</td>
-                        <td>Jerry</td>
-                        <td>
-                            <a class="clickbutton" href="meetingdetails.jsp">查看详情</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>业务洽谈会</td>
-                        <td>第一会议室</td>
-                        <td>2013-10-12 8:00</td>
-                        <td>2013-10-12 12:00</td>
-                        <td>2013-10-10 16:00</td>
-                        <td>Jerry</td>
-                        <td>
-                            <a class="clickbutton" href="meetingdetails.jsp">查看详情</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>业务洽谈会</td>
-                        <td>第一会议室</td>
-                        <td>2013-10-12 8:00</td>
-                        <td>2013-10-12 12:00</td>
-                        <td>2013-10-10 16:00</td>
-                        <td>Jerry</td>
-                        <td>
-                            <a class="clickbutton" href="meetingdetails.jsp">查看详情</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>业务洽谈会</td>
-                        <td>第一会议室</td>
-                        <td>2013-10-12 8:00</td>
-                        <td>2013-10-12 12:00</td>
-                        <td>2013-10-10 16:00</td>
-                        <td>Jerry</td>
-                        <td>
-                            <a class="clickbutton" href="meetingdetails.jsp">查看详情</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>业务洽谈会</td>
-                        <td>第一会议室</td>
-                        <td>2013-10-12 8:00</td>
-                        <td>2013-10-12 12:00</td>
-                        <td>2013-10-10 16:00</td>
-                        <td>Jerry</td>
-                        <td>
-                            <a class="clickbutton" href="meetingdetails.jsp">查看详情</a>
-                        </td>
-                    </tr>
+                    </s:iterator>
                 </table>
             </div>
         </div>

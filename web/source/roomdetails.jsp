@@ -1,11 +1,15 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="s" uri="/struts-tags" %><html>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="d" uri="/struts-tags" %>
+<html>
     <head>
 <meta http-equiv="content-type" content="text/html";charset="gb2312">
         <title>CoolMeeting会议管理系统</title>
         <link rel="stylesheet" href="styles/common.css"/>
     </head>
+
     <body>
+    <s:debug/>
         <div class="page-header">
             <div class="header-banner">
                 <img src="images/header.png" alt="CoolMeeting"/>
@@ -21,7 +25,7 @@
         <div class="page-body">
             <div class="page-sidebar">
                 <div class="sidebar-menugroup">
-                    <div class="sidebar-grouptitle">个人中心</div>
+                    <div class="sidebar-grouptitle">个人中心  </div>
                     <ul class="sidebar-menu">
                         <li class="sidebar-menuitem"><a href="notifications.jsp">最新通知</a></li>
                         <li class="sidebar-menuitem active"><a href="mybookings.jsp">我的预定</a></li>
@@ -51,40 +55,40 @@
                 <div class="content-nav">
                     会议预定 > 修改会议室信息
                 </div>
-                <form>
+                <form action="updateMeetingRoom.action">
                     <fieldset>
                         <legend>会议室信息</legend>
                         <table class="formtable">
                             <tr>
                                 <td>门牌号:</td>
                                 <td>
-                                    <input id="roomnumber" type="text" value="201" maxlength="10"/>
+                                    <input name="roomnumber" type="text" value="<s:property value='meetingRoom.roomCode'/>" maxlength="10"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>会议室名称:</td>
                                 <td>
-                                    <input id="capacity" type="text" value="第一会议室" maxlength="20"/>
+                                    <input name="capacity" type="text" value="<s:property value='meetingRoom.roomName'/>" maxlength="20"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>最多容纳人数：</td>
                                 <td>
-                                    <input id="roomcapacity" type="text" value="15"/>
+                                    <input name="roomcapacity" type="text" value="<s:property value='meetingRoom.roomCapacity'/>"
                                 </td>
                             </tr>
                             <tr>
                                 <td>当前状态：</td>
                                 <td>
-                                    <input type="radio" id="status" name="status" checked="checked" value="1"/><label for="status">启用</label>
-                                    <input type="radio" id="status" name="status"/><label for="status" value="0">停用</label>
-                                    <input type="radio" id="status" name="status"/><label for="status" value="-1">删除</label>
+                                    <input type="radio" name="status"  checked="checked" value="1"/>启用</label>
+                                    <input type="radio" name="status"  value="0"/>停用</label>
+                                    <input type="radio" name="status"  value="-1"/>删除</label>
                                 </td>
                             </tr>
                             <tr>
                                 <td>备注：</td>
                                 <td>
-                                    <textarea id="description" maxlength="200" rows="5" cols="60" >本会议室配备了投影、幕布、音响设备。</textarea>
+                                    <textarea name="description" maxlength="200" rows="5" cols="60" ><s:property value="meetingRoom.description"/> </textarea>
                                 </td>
                             </tr>
                             <tr>

@@ -133,6 +133,19 @@ public class EmployeeDao implements BaseDao<EmployeeEntity> {
         return count;
     }
 
+    public List<EmployeeEntity> getEmployeeNameByDepartment(final int D_id) {
+        final List<EmployeeEntity> nameList = getHibernateTemplate().execute(new HibernateCallback<List<EmployeeEntity>>() {
+            @Override
+            public List<EmployeeEntity> doInHibernate(Session session) throws HibernateException {
+                Query query = session.createQuery("from EmployeeEntity e where e.departmentByDepartmentId=?");
+                query.setInteger(0, D_id);
+                List<EmployeeEntity> list = (List<EmployeeEntity>) query.list();
+                return list;
+            }
+        });
+        return nameList;
+    }
+
 
 
 }

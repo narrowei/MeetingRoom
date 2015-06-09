@@ -51,7 +51,7 @@
                 <div class="content-nav">
                     会议预定 > 添加会议室
                 </div>
-                <form>
+                <form action="addMeetingRoom.action">
                     <fieldset>
                         <legend>会议室信息</legend>
                         <table class="formtable">

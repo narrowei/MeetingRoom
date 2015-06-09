@@ -1,6 +1,7 @@
 package com.chinasoft.meetingroom.service;
 
 import com.chinasoft.meetingroom.dao.EmployeeDao;
+import com.chinasoft.meetingroom.dao.MeetingRoomDao;
 import com.chinasoft.meetingroom.model.DepartmentEntity;
 import com.chinasoft.meetingroom.model.EmployeeEntity;
 
@@ -45,7 +46,7 @@ public class EmployeeService {
     }
 
     public EmployeeEntity getEmployee(Serializable Id){
-        return employeeDao.get(EmployeeEntity.class,Id);
+        return employeeDao.get(EmployeeEntity.class, Id);
     }
     public EmployeeEntity getEmployeebyName(String name){return employeeDao.getEmployeeEntityByName(name);}
     public void saveEmployee(EmployeeEntity employeeEntity){
@@ -107,6 +108,12 @@ public class EmployeeService {
         System.out.println(Username);
         return employeeDao.findByEmployeeByRealnameOrAccountNameOrEmployeeStates(offset, length, Realname, Username);
     }
+
+    public  List<EmployeeEntity> getEmployeeNameByDepartment(int id) {
+        return employeeDao.getEmployeeNameByDepartment(id);
+    }
+
+
 
 
 

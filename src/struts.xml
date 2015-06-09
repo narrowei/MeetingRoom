@@ -18,8 +18,8 @@
                <result name="login">/source/login.jsp</result>
            </global-results>
            <action name="loginAction" class="EmployeeAction" method="employeeLogin">
-               <result>
-                   /source/notifications.jsp
+               <result type="redirectAction">
+                   find7DayMeetings
                </result>
                <result name="error" type="redirect">
                    /source/login.jsp
@@ -69,4 +69,6 @@
        </package>
        <include file="department.xml"/>
        <include file="meetingRoom.xml"/>
+       <include file="JSON.xml"/>
+       <include file="Meeting.xml"/>
 </struts>

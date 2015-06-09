@@ -1,6 +1,7 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %><html>
     <head>
+
 <meta http-equiv="content-type" content="text/html";charset="gb2312">
         <title>CoolMeeting会议管理系统</title>
         <link rel="stylesheet" href="styles/common.css"/>
@@ -9,6 +10,24 @@
         </style>
     </head>
     <body>
+    <%--<script>--%>
+        <%--$("#department").click(Function(){--%>
+            <%--var url="json/getjson";--%>
+            <%--var options;--%>
+            <%--$.ajax({--%>
+                <%--type: 'get',--%>
+                <%--url: url,--%>
+                <%--dataType:'json',--%>
+                <%--success:Function(data){--%>
+                <%--$.each(data,function(i,list)){--%>
+                    <%--var option="<option value="+ list.departmentId + ">" +list.departmentName + "</option>";--%>
+                    <%--options = options + option;--%>
+                <%--}--%>
+                <%--$("#department").append(options);--%>
+            <%--}--%>
+            <%--})--%>
+        <%--}--%>
+    <%--</script>--%>
         <div class="page-header">
             <div class="header-banner">
                 <img src="images/header.png" alt="CoolMeeting"/>
@@ -97,12 +116,10 @@
                             <tr>
                                 <td>所属部门</td>
                                 <td>
-                                    <select name="departmentId">
-                                        <option value="1">实训部</option>
-                                        <option value="2">市场部</option>
-                                        <option value="3">办公室</option>
-                                        <option value="4">人力资源部</option>
-                                        <option value="5">督导部</option>
+                                    <select name="departmentId" id="department">
+                                        <s:iterator value="departmentEntityList">
+                                        <option value="<s:property value='departmentId'/>"><s:property value="departmentName"/></option>
+                                        </s:iterator>
                                     </select>
                                 </td>
                             </tr>

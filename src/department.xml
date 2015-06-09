@@ -21,5 +21,10 @@
                     getDepartments
                 </result>
             </action>
+            <action name="getDepartmentInRegister" class="departmentAction" method="getDepartments">
+                <result>
+                    /source/register.jsp
+                </result>
+            </action>
         </package>
 </struts>

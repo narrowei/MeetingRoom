@@ -60,42 +60,17 @@
                         <th>当前状态</th>
                         <th>操作</th>
                     </tr>
+                    <s:iterator value="meetingRooms">
                     <tr>
-                        <td>101</td>
-                        <td>第一会议室</td>
-                        <td>10</td>
-                        <td>启用</td>
+                        <td><s:property value="roomCode"/> </td>
+                        <td><s:property value="roomName"/></td>
+                        <td><s:property value="roomCapacity"/></td>
+                        <td><s:property value="roomStatus"/></td>
                         <td>
-                            <a class="clickbutton" href="roomdetails.jsp">查看详情</a>
+                            <a class="clickbutton" href="getMeetingRoom.action?id=<s:property value='RoomId'/> ">查看详情</a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>102</td>
-                        <td>第二会议室</td>
-                        <td>15</td>
-                        <td>启用</td>
-                        <td>
-                            <a class="clickbutton" href="roomdetails.jsp">查看详情</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>103</td>
-                        <td>综合会议室</td>
-                        <td>40</td>
-                        <td>停用</td>
-                        <td>
-                            <a class="clickbutton" href="roomdetails.jsp">查看详情</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>213</td>
-                        <td>Mini会议室1</td>
-                        <td>5</td>
-                        <td>删除</td>
-                        <td>
-                            <a class="clickbutton" href="roomdetails.jsp">查看详情</a>
-                        </td>
-                    </tr>
+                    </s:iterator>
                 </table>
             </div>
         </div>
